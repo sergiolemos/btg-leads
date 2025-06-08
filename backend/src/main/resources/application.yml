@@ -1,0 +1,23 @@
+spring:
+    messages:
+        basename: messages
+    datasource:
+        url: jdbc:postgresql://localhost:5433/leads_db
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            hibernate:
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    rabbitmq:
+        host: rabbitmq
+        port: 5672
+        username: admin
+        password: admin
+
+server:
+    port: 8080

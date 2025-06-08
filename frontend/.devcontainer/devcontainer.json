@@ -1,0 +1,23 @@
+{
+    "name": "BTG Leads Frontend",
+    "dockerComposeFile": [
+        "../../docker-compose.yml"
+    ],
+    "service": "frontend",
+    "workspaceFolder": "/workspace/frontend",
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    "settings": {
+        "terminal.integrated.defaultProfile.linux": "/bin/sh"
+    },
+    "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+    ],
+    "forwardPorts": [
+        3000
+    ],
+    "postCreateCommand": "yarn install",
+    "shutdownAction": "stopCompose"
+}

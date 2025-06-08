@@ -1,0 +1,71 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: .devcontainer/Dockerfile
+    container_name: btg_backend
+    working_dir: /workspace/backend
+    volumes:
+      - ./backend:/workspace/backend
+      - m2-repo:/root/.m2
+    command: ./mvnw spring-boot:run
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env
+    environment:
+      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
+      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_RABBITMQ_HOST: ${SPRING_RABBITMQ_HOST}
+      SPRING_RABBITMQ_PORT: ${SPRING_RABBITMQ_PORT}
+      SPRING_RABBITMQ_USERNAME: ${SPRING_RABBITMQ_USERNAME}
+      SPRING_RABBITMQ_PASSWORD: ${SPRING_RABBITMQ_PASSWORD}
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: .devcontainer/Dockerfile
+    container_name: btg_frontend
+    working_dir: /workspace/frontend
+    volumes:
+      - ./frontend:/workspace/frontend
+    ports:
+      - '3000:3000'
+    command: yarn start
+
+  postgres:
+    image: postgres:15.3
+    container_name: btg_postgres
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - pg15_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: btg_rabbitmq
+    env_file:
+      - .env
+    ports:
+      - '${RABBITMQ_PORT}:5672'
+      - '1${RABBITMQ_PORT}:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+
+volumes:
+  pg15_data:
+  m2-repo:
