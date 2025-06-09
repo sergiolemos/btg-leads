@@ -3,7 +3,7 @@
     "build": {
         "dockerfile": "Dockerfile"
     },
-    "workspaceFolder": "./",
+    "workspaceFolder": "/workspaces/btg-leads/backend/workspace",
     "service": "backend",
     "settings": {
         "terminal.integrated.defaultProfile.linux": "/bin/bash"

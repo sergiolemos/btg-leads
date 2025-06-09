@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.btg.leads.api.controller.dto.LeadCadastroDto;
 import com.btg.leads.api.controller.dto.LeadDetalheDto;
 import com.btg.leads.api.domain.model.Lead;
+import com.btg.leads.api.domain.producer.LeadProducer;
 import com.btg.leads.api.domain.repository.LeadRepository;
 import com.btg.leads.api.infra.exception.ValidacaoException;
 
@@ -14,9 +15,11 @@ import com.btg.leads.api.infra.exception.ValidacaoException;
 public class LeadService {
 
     private final LeadRepository leadRepository;
+    private final LeadProducer leadProducer;
 
-    public LeadService(LeadRepository leadRepository) {
+    public LeadService(LeadRepository leadRepository, LeadProducer leadProducer) {
         this.leadRepository = leadRepository;
+        this.leadProducer = leadProducer;
     }
 
     public List<LeadDetalheDto> listar() {
@@ -38,6 +41,7 @@ public class LeadService {
     public LeadDetalheDto cadastrar(LeadCadastroDto dto) {
         var lead = new Lead(dto);
         leadRepository.save(lead);
+        leadProducer.enviarLeadParaFila(lead);
         return new LeadDetalheDto(lead);
     }
 

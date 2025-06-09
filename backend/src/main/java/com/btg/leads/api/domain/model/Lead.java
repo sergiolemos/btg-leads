@@ -1,5 +1,6 @@
 package com.btg.leads.api.domain.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.btg.leads.api.controller.dto.LeadCadastroDto;
@@ -25,7 +26,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "id")
-public class Lead {
+public class Lead implements Serializable{
+
+    private static final long serialVersionUID = 1L;    
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

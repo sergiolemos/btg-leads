@@ -2,7 +2,7 @@ spring:
     messages:
         basename: messages
     datasource:
-        url: jdbc:postgresql://localhost:5433/leads_db
+        url: jdbc:postgresql://172.25.165.175:5433/leads_db
         username: postgres
         password: postgres
         driver-class-name: org.postgresql.Driver
@@ -14,7 +14,7 @@ spring:
                 dialect: org.hibernate.dialect.PostgreSQLDialect
 
     rabbitmq:
-        host: rabbitmq
+        host: 172.25.165.175
         port: 5672
         username: admin
         password: admin
