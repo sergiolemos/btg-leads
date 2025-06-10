@@ -50,7 +50,8 @@ cd btg-leads
 # Suba a aplicação com Docker Compose
 docker-compose up --build
 
-
+ ```   
+ 
 ## 👤 Autor
 
 Desenvolvido por **Sérgio Lemos** para o desafio técnico do BTG Pactual.
