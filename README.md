@@ -57,6 +57,6 @@ docker-compose up --build
 Desenvolvido por **Sérgio Lemos** para o desafio técnico do BTG Pactual.
 
 - 📧 E-mail: sergio@email.com  
-- 📱 Telefone: (86) 9 9999-9999  
+- 📱 Telefone: (86) 9 9953-0200  
 - 🔗 GitHub: [github.com/sergiolemos](https://github.com/sergiolemos)  
 - 💼 LinkedIn: [linkedin.com/in/sergiolemos](https://linkedin.com/in/sergiolemos)
